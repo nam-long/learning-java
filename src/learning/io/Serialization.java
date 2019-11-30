@@ -48,7 +48,7 @@ class Student {
         dos.writeInt(mAddress.getBytes("UTF8").length);
 
         dos.write(mName.getBytes("UTF8"));
-        dos.write(mAge);
+        dos.writeInt(mAge);
         dos.write(mAddress.getBytes("UTF8"));
 
         fos.close();
