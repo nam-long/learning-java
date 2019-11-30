@@ -14,8 +14,12 @@ public class ReadLocalFile {
 //        String str2 = readBuffer("D:\\Java-nang-cao\\learning-java\\resources\\cadao.txt");
 //        System.out.println(str2);
 
-        String str3 = readOnlineResource("https://raw.githubusercontent.com/nam-long/learning-java/master/resources/ca-dao.txt");
+        String str3 = downloadResource("https://raw.githubusercontent.com/nam-long/learning-java/master/resources/cadao.txt");
         System.out.println(str3);
+
+//        String imageUrl = "";
+//        downloadImage(imageUrl, "D:\\test.png");
+
     }
 
     public static String read(String filename) throws IOException {
@@ -97,8 +101,7 @@ public class ReadLocalFile {
         return str;
     }
 
-    // https://raw.githubusercontent.com/nam-long/learning-java/master/resources/ca-dao.txt
-    public static String readOnlineResource(String strUrl) throws IOException {
+    public static String downloadResourceByHttps(String strUrl) throws IOException {
 
         String str = null;
 
@@ -123,5 +126,66 @@ public class ReadLocalFile {
         }
 
         return str;
+    }
+
+    public static String downloadResource(String strUrl) throws IOException {
+
+        String str = null;
+
+        URL url = new URL(strUrl);
+        InputStream is = url.openStream();
+        BufferedInputStream bis = new BufferedInputStream(is);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        byte[] buffer = new byte[100];
+        int count;
+        while ((count = bis.read(buffer)) != -1) {
+            baos.write(buffer, 0, count);
+        }
+        str = new String(baos.toByteArray());
+
+        is.close();
+
+        return str;
+    }
+
+    public static void downloadImage(String imageUrl, String filename) throws IOException {
+
+        byte[] imageData = downloadImageData(imageUrl);
+        saveFile(filename, imageData);
+    }
+
+    public static byte[] downloadImageData(String strUrl) throws IOException {
+
+        byte[] imageData = null;
+
+        URL url = new URL(strUrl);
+        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+
+        int responseCode = conn.getResponseCode();
+        if (responseCode == HttpsURLConnection.HTTP_OK) {
+
+            InputStream is = conn.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(is);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+            byte[] buffer = new byte[100];
+            int count;
+            while ((count = bis.read(buffer)) != -1) {
+                baos.write(buffer, 0, count);
+            }
+            imageData = baos.toByteArray();
+
+            is.close();
+        }
+
+        return imageData;
+    }
+
+    public static void saveFile(String filename, byte[] data) throws IOException {
+
+        FileOutputStream fos = new FileOutputStream(filename);
+        fos.write(data);
+        fos.close();
     }
 }
