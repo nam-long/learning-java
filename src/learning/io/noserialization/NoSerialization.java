@@ -1,9 +1,8 @@
-package learning.io;
+package learning.io.noserialization;
 
 import java.io.*;
-import java.nio.charset.Charset;
 
-public class Serialization {
+public class NoSerialization {
 
     public static void main(String[] args) throws IOException {
 
