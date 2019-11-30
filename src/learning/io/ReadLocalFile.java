@@ -3,6 +3,7 @@ package learning.io;
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ReadLocalFile {
 
@@ -214,17 +215,21 @@ public class ReadLocalFile {
         fos.close();
     }
 
+    public static ArrayList<String> listPaths = new ArrayList<>();
+
     public static void listFiles(String folderPath) throws IOException {
 
         File folder = new File(folderPath);
 
         File[] files = folder.listFiles();
         if (files.length == 0) {
+            listPaths.add(folder.getCanonicalPath());
             System.out.println(folder.getCanonicalPath());
         }
 
         for (File f : files) {
             if (f.isFile()) {
+                listPaths.add(f.getCanonicalPath());
                 System.out.println(f.getCanonicalPath());
             } else {
                 listFiles(f.getPath());
