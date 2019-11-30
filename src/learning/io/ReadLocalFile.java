@@ -17,12 +17,13 @@ public class ReadLocalFile {
         String str3 = downloadResource("https://raw.githubusercontent.com/nam-long/learning-java/master/resources/cadao.txt");
         System.out.println(str3);
 
-        downloadResource("https://raw.githubusercontent.com/nam-long/learning-java/master/resources/cadao.txt",
-                "test.txt");
+//        downloadResource("https://raw.githubusercontent.com/nam-long/learning-java/master/resources/cadao.txt",
+//                "D:\\test\\test.txt");
 
 //        String imageUrl = "";
 //        downloadImage(imageUrl, "D:\\test.png");
 
+        listFiles("D:\\Java-nang-cao");
     }
 
     public static String read(String filename) throws IOException {
@@ -211,5 +212,35 @@ public class ReadLocalFile {
         FileOutputStream fos = new FileOutputStream(filename);
         fos.write(data);
         fos.close();
+    }
+
+    public static void listFiles(String folderPath) throws IOException {
+
+        File folder = new File(folderPath);
+
+        File[] files = folder.listFiles();
+        if (files.length == 0) {
+            System.out.println(folder.getCanonicalPath());
+        }
+
+        for (File f : files) {
+            if (f.isFile()) {
+                System.out.println(f.getCanonicalPath());
+            } else {
+                listFiles(f.getPath());
+            }
+        }
+    }
+
+    /**
+     * Tìm tập tin có tên là 'filename', xóa những tập tin khác giống
+     * (trùng tên, giống nội dung) với tập tin này trong folderPath.
+     *
+     * Ví dụ: removeDuplicatedFiles("D:\\project", "readme.txt");
+     *
+     * @param folderPath
+     * @param filename
+     */
+    public static void removeDuplicatedFiles(String folderPath, String filename) {
     }
 }
