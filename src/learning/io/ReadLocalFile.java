@@ -83,14 +83,13 @@ public class ReadLocalFile {
     public static String readBuffer(String filename) throws IOException {
 
         String str = null;
-        // 0123456789
-        byte[] buffer = new byte[10]; //[0][1][2]
+        byte[] buffer = new byte[10];
 
         InputStream is = new FileInputStream(filename);
         BufferedInputStream bis = new BufferedInputStream(is);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        int count;
+        int count; /* So byte doc vao buffer */
         while ((count = bis.read(buffer)) != -1) {
             baos.write(buffer, 0, count);
         }
@@ -116,7 +115,7 @@ public class ReadLocalFile {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
             byte[] buffer = new byte[100];
-            int count;
+            int count; /* So byte doc vao buffer */
             while ((count = bis.read(buffer)) != -1) {
                 baos.write(buffer, 0, count);
             }
@@ -138,7 +137,7 @@ public class ReadLocalFile {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         byte[] buffer = new byte[100];
-        int count;
+        int count; /* So byte doc vao buffer */
         while ((count = bis.read(buffer)) != -1) {
             baos.write(buffer, 0, count);
         }
@@ -170,7 +169,7 @@ public class ReadLocalFile {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
             byte[] buffer = new byte[100];
-            int count;
+            int count; /* So byte doc vao buffer */
             while ((count = bis.read(buffer)) != -1) {
                 baos.write(buffer, 0, count);
             }
