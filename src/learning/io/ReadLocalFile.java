@@ -6,10 +6,10 @@ public class ReadLocalFile {
 
     public static void main(String[] args) throws IOException {
 
-        String str1 = readByLine("D:\\Java-nang-cao\\learning-java\\resources\\ca-dao.txt");
+        String str1 = readBuffer("D:\\Java-nang-cao\\learning-java\\resources\\ca-dao.txt");
         System.out.println(str1);
 
-        String str2 = readUTF8ByLine("D:\\Java-nang-cao\\learning-java\\resources\\cadao.txt");
+        String str2 = readBuffer("D:\\Java-nang-cao\\learning-java\\resources\\cadao.txt");
         System.out.println(str2);
     }
 
@@ -67,6 +67,27 @@ public class ReadLocalFile {
             str += line + '\n';
         }
         reader.close();
+
+        return str;
+    }
+
+    public static String readBuffer(String filename) throws IOException {
+
+        String str = null;
+        // 0123456789
+        byte[] buffer = new byte[10]; //[0][1][2]
+
+        InputStream is = new FileInputStream(filename);
+        BufferedInputStream bis = new BufferedInputStream(is);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        int count;
+        while ((count = bis.read(buffer)) != -1) {
+            baos.write(buffer, 0, count);
+        }
+        str = new String(baos.toByteArray());
+        baos.close();
+        is.close();
 
         return str;
     }
