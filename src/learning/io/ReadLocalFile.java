@@ -17,6 +17,9 @@ public class ReadLocalFile {
         String str3 = downloadResource("https://raw.githubusercontent.com/nam-long/learning-java/master/resources/cadao.txt");
         System.out.println(str3);
 
+        downloadResource("https://raw.githubusercontent.com/nam-long/learning-java/master/resources/cadao.txt",
+                "test.txt");
+
 //        String imageUrl = "";
 //        downloadImage(imageUrl, "D:\\test.png");
 
@@ -140,12 +143,34 @@ public class ReadLocalFile {
         int count; /* So byte doc vao buffer */
         while ((count = bis.read(buffer)) != -1) {
             baos.write(buffer, 0, count);
+            ///
         }
         str = new String(baos.toByteArray());
 
         is.close();
 
         return str;
+    }
+
+    public static void downloadResource(String strUrl, String filename) throws IOException {
+
+        String str = null;
+
+        URL url = new URL(strUrl);
+        InputStream is = url.openStream();
+        BufferedInputStream bis = new BufferedInputStream(is);
+        FileOutputStream fos = new FileOutputStream(filename);
+
+        byte[] buffer = new byte[100];
+        int count; /* Số bytes được đọc vào buffer */
+        while ((count = bis.read(buffer)) != -1) {
+
+            // Dùng đối tượng FileOutputStream để ghi buffer vừa đọc được vào file
+            fos.write(buffer, 0, count);
+        }
+
+        fos.close();
+        is.close();
     }
 
     public static void downloadImage(String imageUrl, String filename) throws IOException {
