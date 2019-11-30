@@ -1,16 +1,21 @@
 package learning.io;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
+import java.net.URL;
 
 public class ReadLocalFile {
 
     public static void main(String[] args) throws IOException {
 
-        String str1 = readBuffer("D:\\Java-nang-cao\\learning-java\\resources\\ca-dao.txt");
-        System.out.println(str1);
+//        String str1 = readBuffer("D:\\Java-nang-cao\\learning-java\\resources\\ca-dao.txt");
+//        System.out.println(str1);
+//
+//        String str2 = readBuffer("D:\\Java-nang-cao\\learning-java\\resources\\cadao.txt");
+//        System.out.println(str2);
 
-        String str2 = readBuffer("D:\\Java-nang-cao\\learning-java\\resources\\cadao.txt");
-        System.out.println(str2);
+        String str3 = readOnlineResource("https://raw.githubusercontent.com/nam-long/learning-java/master/resources/ca-dao.txt");
+        System.out.println(str3);
     }
 
     public static String read(String filename) throws IOException {
@@ -88,6 +93,34 @@ public class ReadLocalFile {
         str = new String(baos.toByteArray());
         baos.close();
         is.close();
+
+        return str;
+    }
+
+    // https://raw.githubusercontent.com/nam-long/learning-java/master/resources/ca-dao.txt
+    public static String readOnlineResource(String strUrl) throws IOException {
+
+        String str = null;
+
+        URL url = new URL(strUrl);
+        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+
+        int responseCode = conn.getResponseCode();
+        if (responseCode == HttpsURLConnection.HTTP_OK) {
+
+            InputStream is = conn.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(is);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+            byte[] buffer = new byte[100];
+            int count;
+            while ((count = bis.read(buffer)) != -1) {
+                baos.write(buffer, 0, count);
+            }
+            str = new String(baos.toByteArray());
+
+            is.close();
+        }
 
         return str;
     }
