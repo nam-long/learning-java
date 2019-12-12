@@ -1,4 +1,4 @@
-package learning.io.exercises.RemoveDuplicatedFiles;
+package learning.io.exercises.RemoveDuplicatedFiles.MainThread;
 
 import java.io.File;
 import java.io.FileInputStream;
