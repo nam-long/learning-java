@@ -1,5 +1,9 @@
 package learning.swing.layout.cardlayout;
 
+import learning.swing.layout.cardlayout.cards.PanelOne;
+import learning.swing.layout.cardlayout.cards.PanelThree;
+import learning.swing.layout.cardlayout.cards.PanelTwo;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

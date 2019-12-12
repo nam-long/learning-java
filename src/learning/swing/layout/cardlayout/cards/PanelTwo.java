@@ -1,8 +1,8 @@
-package learning.swing.layout.cardlayout;
+package learning.swing.layout.cardlayout.cards;
 
 import javax.swing.*;
 
-public class PanelThree {
+public class PanelTwo {
 
     private JPanel panel;
 

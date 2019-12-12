@@ -1,4 +1,4 @@
-package learning.swing.layout.cardlayout;
+package learning.swing.layout.cardlayout.cards;
 
 import javax.swing.*;
 
