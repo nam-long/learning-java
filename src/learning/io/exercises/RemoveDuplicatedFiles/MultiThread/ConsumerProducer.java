@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class ConsumerProducer implements Consumer, Producer {
 
-    private static final int LIMIT = 2;
+    private static final int LIMIT = 3;
 
     private LinkedList<File> mFiles = new LinkedList<>();
 

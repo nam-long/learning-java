@@ -11,15 +11,23 @@ public class CleanerThread {
     private File mFile;
 
     private Thread mThread;
+    private String mThreadName;
     private boolean mIsRunning;
 
-    public CleanerThread(Consumer consumer, String filename) {
+    private int mCount;
 
+    public CleanerThread(String threadName, Consumer consumer, String filename) {
+
+        mThreadName = threadName;
         mConsumer = consumer;
         mFile = new File(filename);
     }
 
-    public void start() {
+    public void execute() {
+
+        if (mThread != null) {
+            throw new IllegalStateException(Thread.currentThread().getName() + " already created!");
+        }
 
         mThread = new Thread(new Runnable() {
             @Override
@@ -31,8 +39,9 @@ public class CleanerThread {
                     try {
                         File f = mConsumer.consume();
                         if (compareFileContent(f, mFile)) {
-                            System.out.println("Deleting: " + f.getAbsolutePath());
+                            System.out.println(Thread.currentThread().getName() + " deleting: " + f.getAbsolutePath());
                             f.delete();
+                            mCount++;
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -40,9 +49,9 @@ public class CleanerThread {
                     }
                 }
 
-                System.out.println("Cleaner finished.");
+                System.out.println(Thread.currentThread().getName() + " FINISHED. Number of files deleted is: " + mCount);
             }
-        });
+        }, mThreadName);
         mThread.start();
     }
 
@@ -51,7 +60,9 @@ public class CleanerThread {
         mIsRunning = false;
 
         if (mConsumer.isEmpty()) {
-            mThread.interrupt();
+            if (mThread != null) {
+                mThread.interrupt();
+            }
         }
     }
 
@@ -75,6 +86,10 @@ public class CleanerThread {
                     break;
                 } else {
                     for (int i = 0; i < count1; i++) {
+
+                        // Increase cost of comparing files
+                        try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
+
                         if (buffer1[i] != buffer2[i]) {
                             result = false;
                             break;

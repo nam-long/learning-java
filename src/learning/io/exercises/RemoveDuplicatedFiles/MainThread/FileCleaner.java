@@ -10,8 +10,8 @@ public class FileCleaner {
 
     public static void main(String[] args) {
 
-        String folder = "D:\\Java-nang-cao\\learning-java\\test";
-        String filename = "D:\\Java-nang-cao\\learning-java\\abc.txt";
+        String folder = "test/duplicated-files";
+        String filename = "test/duplicated-files/abc.txt";
         FileCleaner helper = new FileCleaner(folder, filename);
         helper.removeDuplicatedFiles();
     }
@@ -82,6 +82,10 @@ public class FileCleaner {
                     break;
                 } else {
                     for (int i = 0; i < count1; i++) {
+
+                        // Increase cost of comparing files
+                        try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
+
                         if (buffer1[i] != buffer2[i]) {
                             result = false;
                             break;

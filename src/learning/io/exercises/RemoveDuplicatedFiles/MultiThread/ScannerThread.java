@@ -12,17 +12,27 @@ public class ScannerThread {
 
     private OnCompletionListener mOnCompletionListener;
 
-    public ScannerThread(Producer producer, String folder, String filename, OnCompletionListener onCompletionListener) {
+    private Thread mThread;
+    private String mThreadName;
 
+    private int mCount;
+
+    public ScannerThread(String threadName, Producer producer, String folder, String filename, OnCompletionListener onCompletionListener) {
+
+        mThreadName = threadName;
         mProducer = producer;
         mFolder = new File(folder);
         mFile = new File(filename);
         mOnCompletionListener = onCompletionListener;
     }
 
-    public void start() {
+    public void execute() {
 
-        Thread thread = new Thread(new Runnable() {
+        if (mThread != null) {
+            throw new IllegalStateException(Thread.currentThread().getName() + " already created!");
+        }
+
+        mThread = new Thread(new Runnable() {
             @Override
             public void run() {
 
@@ -36,10 +46,10 @@ public class ScannerThread {
                     mOnCompletionListener.onComplete();
                 }
 
-                System.out.println("Scanner finished.");
+                System.out.println(Thread.currentThread().getName() + " FINISHED. Number of files found is: " + mCount);
             }
-        });
-        thread.start();
+        }, mThreadName);
+        mThread.start();
     }
 
     private void scanFile(File folder) throws InterruptedException {
@@ -53,9 +63,10 @@ public class ScannerThread {
             if (f.isDirectory()) {
                 scanFile(f);
             } else {
-                if (f.length() == mFile.length() && f.getName().equalsIgnoreCase(mFile.getName())) {
+                if (f.length() == mFile.length() && f.getName().equalsIgnoreCase(mFile.getName()) && !f.equals(mFile)) {
                     mProducer.produce(f);
-                    System.out.println("Find: " + f.getAbsolutePath());
+                    mCount++;
+                    System.out.println(Thread.currentThread().getName() + " found: " + f.getAbsolutePath());
                 }
             }
         }
