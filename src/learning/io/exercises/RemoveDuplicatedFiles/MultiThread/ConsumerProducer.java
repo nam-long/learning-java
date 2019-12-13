@@ -3,7 +3,7 @@ package learning.io.exercises.RemoveDuplicatedFiles.MultiThread;
 import java.io.File;
 import java.util.LinkedList;
 
-public class ConsumerProducer implements Consumer, Producer {
+public class ConsumerProducer {
 
     private static final int LIMIT = 3;
 
@@ -11,7 +11,6 @@ public class ConsumerProducer implements Consumer, Producer {
 
     private final Object mLock = new Object();
 
-    @Override
     public File consume() throws InterruptedException {
 
         File f = null;
@@ -29,7 +28,6 @@ public class ConsumerProducer implements Consumer, Producer {
         return f;
     }
 
-    @Override
     public boolean isEmpty() {
 
         synchronized (mLock) {
@@ -37,7 +35,6 @@ public class ConsumerProducer implements Consumer, Producer {
         }
     }
 
-    @Override
     public void produce(File f) throws InterruptedException {
 
         synchronized (mLock) {

@@ -4,7 +4,7 @@ import java.io.File;
 
 public class ScannerThread {
 
-    private Producer mProducer;
+    private ConsumerProducer mConsumerProducer;
 
     private File mFolder;
 
@@ -17,10 +17,10 @@ public class ScannerThread {
 
     private int mCount;
 
-    public ScannerThread(String threadName, Producer producer, String folder, String filename, OnCompletionListener onCompletionListener) {
+    public ScannerThread(String threadName, ConsumerProducer consumerProducer, String folder, String filename, OnCompletionListener onCompletionListener) {
 
         mThreadName = threadName;
-        mProducer = producer;
+        mConsumerProducer = consumerProducer;
         mFolder = new File(folder);
         mFile = new File(filename);
         mOnCompletionListener = onCompletionListener;
@@ -64,7 +64,7 @@ public class ScannerThread {
                 scanFile(f);
             } else {
                 if (f.length() == mFile.length() && f.getName().equalsIgnoreCase(mFile.getName()) && !f.equals(mFile)) {
-                    mProducer.produce(f);
+                    mConsumerProducer.produce(f);
                     mCount++;
                     System.out.println(Thread.currentThread().getName() + " found: " + f.getAbsolutePath());
                 }

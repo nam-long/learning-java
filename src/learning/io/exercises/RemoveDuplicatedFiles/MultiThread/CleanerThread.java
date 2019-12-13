@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class CleanerThread {
 
-    private Consumer mConsumer;
+    private ConsumerProducer mConsumerProducer;
 
     private File mFile;
 
@@ -16,10 +16,10 @@ public class CleanerThread {
 
     private int mCount;
 
-    public CleanerThread(String threadName, Consumer consumer, String filename) {
+    public CleanerThread(String threadName, ConsumerProducer consumerProducer, String filename) {
 
         mThreadName = threadName;
-        mConsumer = consumer;
+        mConsumerProducer = consumerProducer;
         mFile = new File(filename);
     }
 
@@ -35,9 +35,9 @@ public class CleanerThread {
 
                 mIsRunning = true;
 
-                while (mIsRunning || !mConsumer.isEmpty()) {
+                while (mIsRunning || !mConsumerProducer.isEmpty()) {
                     try {
-                        File f = mConsumer.consume();
+                        File f = mConsumerProducer.consume();
                         if (compareFileContent(f, mFile)) {
                             System.out.println(Thread.currentThread().getName() + " deleting: " + f.getAbsolutePath());
                             f.delete();
@@ -59,7 +59,7 @@ public class CleanerThread {
 
         mIsRunning = false;
 
-        if (mConsumer.isEmpty()) {
+        if (mConsumerProducer.isEmpty()) {
             if (mThread != null) {
                 mThread.interrupt();
             }
