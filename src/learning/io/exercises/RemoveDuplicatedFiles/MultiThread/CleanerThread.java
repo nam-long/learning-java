@@ -88,7 +88,7 @@ public class CleanerThread {
                     for (int i = 0; i < count1; i++) {
 
                         // Increase cost of comparing files
-                        try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
+                        try { Thread.sleep(10); } catch (InterruptedException e) { e.printStackTrace(); }
 
                         if (buffer1[i] != buffer2[i]) {
                             result = false;
