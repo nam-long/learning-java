@@ -1,6 +1,5 @@
 package learning.io.exercises.RemoveDuplicatedFiles.MultiThread;
 
-import javax.sound.midi.SysexMessage;
 import java.io.File;
 import java.util.LinkedList;
 
