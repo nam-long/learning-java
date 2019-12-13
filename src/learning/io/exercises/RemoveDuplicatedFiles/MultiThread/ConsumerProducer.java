@@ -1,5 +1,6 @@
 package learning.io.exercises.RemoveDuplicatedFiles.MultiThread;
 
+import javax.sound.midi.SysexMessage;
 import java.io.File;
 import java.util.LinkedList;
 
@@ -9,7 +10,7 @@ public class ConsumerProducer implements Consumer, Producer {
 
     private LinkedList<File> mFiles = new LinkedList<>();
 
-    private Object mLock = new Object();
+    private final Object mLock = new Object();
 
     @Override
     public File consume() throws InterruptedException {
@@ -18,6 +19,7 @@ public class ConsumerProducer implements Consumer, Producer {
         synchronized (mLock) {
 
             while (mFiles.isEmpty()) {
+                System.out.println(Thread.currentThread().getName() + " waiting...");
                 mLock.wait();
             }
 
@@ -41,7 +43,8 @@ public class ConsumerProducer implements Consumer, Producer {
 
         synchronized (mLock) {
 
-            while (mFiles.size() == LIMIT) {
+            while (mFiles.size() == (LIMIT - 1)) {
+                System.out.println(Thread.currentThread().getName() + " waiting...");
                 mLock.wait();
             }
 

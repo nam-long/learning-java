@@ -9,11 +9,6 @@ public class Main {
         String folder = "test/duplicated-files";
         String filename = "test/duplicated-files/abc.txt";
 
-        if (!(new File(filename)).exists()) {
-            System.out.println("Not exist");
-            return;
-        }
-
         ConsumerProducer cp = new ConsumerProducer();
 
         CleanerThread cleanerThread = new CleanerThread("Cleaner-00", cp, filename);
