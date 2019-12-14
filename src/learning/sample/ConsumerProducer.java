@@ -25,13 +25,14 @@ public class ConsumerProducer {
 
             while (mFiles.isEmpty()) {
                 try {
+                    System.out.println(Thread.currentThread().getName() + " waiting...");
                     mLock.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
 
-            f = mFiles.getFirst();
+            f = mFiles.removeFirst();
 
             mLock.notify();
         }

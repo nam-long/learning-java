@@ -48,7 +48,9 @@ public class Scanner {
             if (f.isDirectory()) {
                 scan(f);
             } else {
-                if (f.length() == mFile.length() && f.getName().equalsIgnoreCase(mFile.getName())) {
+                if (f.length() == mFile.length()
+                        && f.getName().equalsIgnoreCase(mFile.getName())
+                        && !f.equals(mFile)) {
                     consumerProducer.produce(f);
                     mCount++;
                     System.out.println(Thread.currentThread().getName() + " found: " + f.getAbsolutePath());
