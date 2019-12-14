@@ -2,18 +2,23 @@ package learning.designpattern.strategy.issue01;
 
 public class Duck {
 
-    private String name;
+    private FlyBehavior mFlyBehavior;
+
+    private QuackBehavior mQuackBehavior;
 
     public Duck() {
     }
 
     public void display() {}
 
-    public void quack() {
-        System.out.println("Quack, Quack...");
+    public void fly() {
+        mFlyBehavior.fly();
     }
 
-    public void fly() {
-        System.out.println("Flying.");
+    public void setFlyBehavior(FlyBehavior flyBehavior) {
+        mFlyBehavior = flyBehavior;
+    }
+
+    public void setQuackBehavior(QuackBehavior quackBehavior) {
     }
 }
