@@ -13,6 +13,7 @@ public class ConsumerProducer {
 
         synchronized (mLock) {
             mFiles.add(f);
+            System.out.println(Thread.currentThread().getName() + " notify. Produce: " + f.getAbsolutePath());
             mLock.notify();
         }
     }
@@ -23,18 +24,21 @@ public class ConsumerProducer {
 
         synchronized (mLock) {
 
-            while (mFiles.isEmpty()) {
+            while (!Scanner.isFinished() && mFiles.isEmpty()) {
                 try {
                     System.out.println(Thread.currentThread().getName() + " waiting...");
                     mLock.wait();
+                    System.out.println(Thread.currentThread().getName() + " notified!");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
 
-            f = mFiles.removeFirst();
-
-            mLock.notify();
+            if (!mFiles.isEmpty()) {
+                f = mFiles.removeFirst();
+                System.out.println(Thread.currentThread().getName() + " notify. Consume: " + f.getAbsolutePath() + ". Size-list: " + mFiles.size());
+                mLock.notify();
+            }
         }
 
         return f;
@@ -44,6 +48,12 @@ public class ConsumerProducer {
 
         synchronized (mLock) {
             return mFiles.isEmpty();
+        }
+    }
+
+    public void unlockAll() {
+        synchronized (mLock) {
+            mLock.notifyAll();
         }
     }
 }

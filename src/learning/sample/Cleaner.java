@@ -30,10 +30,10 @@ public class Cleaner {
                 while (!Scanner.isFinished() || !mConsumerProducer.isEmpty()) {
 
                     File f = mConsumerProducer.consume();
-                    if (compareContent(f, mFile)) {
-                        System.out.println(Thread.currentThread().getName() + " deleting: " + f.getAbsolutePath());
+                    if (f != null && compareContent(f, mFile)) {
                         f.delete();
                         mCount++;
+                        System.out.println(Thread.currentThread().getName() + ": " + f.getAbsolutePath() + " deleted");
                     }
                 }
                 System.out.println(Thread.currentThread().getName() + " FINISHED. Files deleted: " + mCount);

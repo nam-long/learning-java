@@ -13,14 +13,14 @@ public class Scanner {
 
     private int mCount;
 
-    private ConsumerProducer consumerProducer;
+    private ConsumerProducer mConsumerProducer;
 
     private static boolean mIsFinished = false;
 
     public Scanner(String threadName, String folder, String filename, ConsumerProducer cp) {
         mFolder = new File(folder);
         mFile = new File(filename);
-        consumerProducer = cp;
+        mConsumerProducer = cp;
         mThreadName = threadName;
     }
 
@@ -35,6 +35,7 @@ public class Scanner {
             public void run() {
                 scan(mFolder);
                 mIsFinished = true;
+                mConsumerProducer.unlockAll();
                 System.out.println(Thread.currentThread().getName() + " FINISHED. Files found: " + mCount);
             }
         }, mThreadName);
@@ -51,7 +52,7 @@ public class Scanner {
                 if (f.length() == mFile.length()
                         && f.getName().equalsIgnoreCase(mFile.getName())
                         && !f.equals(mFile)) {
-                    consumerProducer.produce(f);
+                    mConsumerProducer.produce(f);
                     mCount++;
                     System.out.println(Thread.currentThread().getName() + " found: " + f.getAbsolutePath());
                 }
