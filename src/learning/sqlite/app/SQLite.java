@@ -1,10 +1,6 @@
 package learning.sqlite.app;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Arrays;
+import java.sql.*;
 
 public class SQLite {
 
@@ -53,7 +49,60 @@ public class SQLite {
         return false;
     }
 
+    public void insert(String sql, String name) throws SQLException {
 
+        if (mConnection != null) {
+            PreparedStatement preparedStatement = mConnection.prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            preparedStatement.executeUpdate();
+        } else {
+            printStackTrace("Connection is NULL");
+        }
+    }
+
+    public void select(String sql) throws SQLException {
+
+        if (mConnection != null) {
+            Statement statement = mConnection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            // loop through the result set
+            while (rs.next()) {
+                System.out.println(rs.getInt("id") + "\t" + rs.getString("name"));
+            }
+        } else {
+            printStackTrace("Connection is NULL");
+        }
+    }
+
+    public void update(String sql, int id, String newName) throws SQLException {
+
+        if (mConnection != null) {
+            PreparedStatement pstmt = mConnection.prepareStatement(sql);
+
+            // set the corresponding param
+            pstmt.setString(1, newName);
+            pstmt.setInt(2, id);
+            // update
+            pstmt.executeUpdate();
+        } else {
+            printStackTrace("Connection is NULL");
+        }
+    }
+
+    public void delete(String sql, int id) throws SQLException {
+
+        if (mConnection != null) {
+            PreparedStatement preparedStatement = mConnection.prepareStatement(sql);
+
+            // set the corresponding param
+            preparedStatement.setInt(1, id);
+            // execute the delete statement
+            preparedStatement.executeUpdate();
+        } else {
+            printStackTrace("Connection is NULL");
+        }
+    }
 
     private void printStackTrace(String message) {
 
