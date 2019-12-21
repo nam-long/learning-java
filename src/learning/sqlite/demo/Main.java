@@ -81,7 +81,8 @@ public class Main {
 
         /**
          * Gán giá trị thật sự cho các tham số (?) trong câu lệnh SQL.
-         * Lưu ý: thứ tự các tham số bắt đầu từ 1 (không giống như kiểu dữ liệu mảng có thứ tự bắt đầu từ 0)
+         * Lưu ý: thứ tự của tham số đầu tiên là 1 (không giống như kiểu dữ liệu mảng với phần tử đầu tiên
+         * có thứ tự (index) là 0).
          * Đối với câu lệnh SQL_CREATE_EMPLOYEE, có 2 tham số (?,?) đại diện lần lượt cho fullname và salary.
          */
         ps.setString(1, fullname);
@@ -114,21 +115,21 @@ public class Main {
         final String SQL_SELECT_ALL_EMPLOYEES = "SELECT * FROM EmployeeTable";
 
         /**
-         * Chú ý: đối với những câu lệnh SQLite không cần truyền tham số (dấu ?) cho nó
-         * thì có thể sử dụng Statement để thay cho PreparedStatement
+         * Chú ý: đối với những câu lệnh SQLite không có tham số (dấu ?)
+         * thì có thể sử dụng Statement để thay cho PreparedStatement.
          */
         Statement statement = connection.createStatement();
 
         /**
          * Kết quả của truy vấn sẽ là thông tin của nhân viên, thông tin này được quản lý
-         * bởi đối tượng có kiểu ResultSet
+         * bởi đối tượng có kiểu ResultSet.
          */
         ResultSet rs = statement.executeQuery(SQL_SELECT_ALL_EMPLOYEES);
 
         /**
-         * Vì đây là câu lệnh SELECT ALL, có kết quả trả về sẽ tất cả các nhân viên
-         * trong bảng 'Employee', nên kết quả này có thể có nhiều dòng (record).
-         * Do đó nhất nhiết phải dùng vòng lặp 'while' để duyệt cho từng kết quả.
+         * Vì đây là câu lệnh SELECT ALL, kết quả trả về sẽ là tất cả các nhân viên
+         * có trong bảng 'Employee', kết quả này có thể có nhiều dòng (record).
+         * Do đó nhất nhiết phải dùng vòng lặp 'while' để duyệt qua từng record.
          */
         while (rs.next()) {
             /**
