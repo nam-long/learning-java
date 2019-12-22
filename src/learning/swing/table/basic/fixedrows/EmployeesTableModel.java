@@ -1,4 +1,4 @@
-package learning.swing.table.basic.fixedrow;
+package learning.swing.table.basic.fixedrows;
 
 import javax.swing.table.AbstractTableModel;
 
