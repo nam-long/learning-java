@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BasicTable extends JFrame {
+public class EmployeesFrame extends JFrame {
 
     private JPanel rootPanel;
 
@@ -19,7 +19,7 @@ public class BasicTable extends JFrame {
     private JTable employeesTable;
     private EmployeesTableModel employeesTableModel;
 
-    public BasicTable() {
+    EmployeesFrame() {
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(rootPanel);
@@ -72,9 +72,9 @@ public class BasicTable extends JFrame {
 
     public static void main(String[] args) {
 
-        BasicTable frame = new BasicTable();
-        frame.setTitle("Employees Table");
-        frame.setPreferredSize(new Dimension(800, 600));
+        EmployeesFrame frame = new EmployeesFrame();
+        frame.setTitle("Employees");
+        frame.setPreferredSize(new Dimension(600, 400));
         frame.pack();
         frame.setVisible(true);
     }
