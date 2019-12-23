@@ -41,4 +41,13 @@ class EmployeesTableModel extends AbstractTableModel {
         employees.add(employee);
         fireTableDataChanged();
     }
+
+    public void updateEmployee(int rowIndex, Object[] employee) {
+
+        Object[] dataRow = employees.get(rowIndex);
+        for (int column = 0; column < dataRow.length; column++) {
+            dataRow[column] = employee[column];
+        }
+        fireTableDataChanged();
+    }
 }
