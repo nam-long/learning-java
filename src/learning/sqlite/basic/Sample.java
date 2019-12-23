@@ -1,4 +1,4 @@
-package learning.sqlite.demo;
+package learning.sqlite.basic;
 
 import java.sql.*;
 
@@ -7,7 +7,7 @@ import java.sql.*;
  *
  * Tham khảo: https://www.sqlitetutorial.net/sqlite-java/
  */
-public class Main {
+public class Sample {
 
     public static void main(String[] args) throws SQLException {
 
@@ -26,7 +26,7 @@ public class Main {
         Connection connection = DriverManager.getConnection(url);
 
         // Tạo bảng tên là 'Employee' thuộc cơ sở dữ liệu 'sample.db'
-        createEmployeeTable(connection);
+        createEmployeesTable(connection);
 
         /**
          * Thêm mới một nhân viên vào bảng 'Employee'.
@@ -61,20 +61,20 @@ public class Main {
         connection.close();
     }
 
-    public static void createEmployeeTable(Connection connection) throws SQLException {
+    public static void createEmployeesTable(Connection connection) throws SQLException {
 
-        String SQL_CREATE_EMPLOYEE_TABLE = "CREATE TABLE IF NOT EXISTS EmployeeTable (\n"
+        String SQL_CREATE_EMPLOYEES_TABLE = "CREATE TABLE IF NOT EXISTS EmployeesTable (\n"
                 + "    id integer PRIMARY KEY,\n"
                 + "    fullname text NOT NULL,\n"
                 + "    salary integer\n"
                 + ");";
         Statement statement = connection.createStatement();
-        statement.execute(SQL_CREATE_EMPLOYEE_TABLE);
+        statement.execute(SQL_CREATE_EMPLOYEES_TABLE);
     }
 
     public static void insertEmployee(Connection connection, String fullname, int salary) throws SQLException {
 
-        final String SQL_CREATE_EMPLOYEE = "INSERT INTO EmployeeTable(fullname, salary)" +
+        final String SQL_CREATE_EMPLOYEE = "INSERT INTO EmployeesTable(fullname, salary)" +
                 "VALUES(?,?)";
 
         PreparedStatement ps = connection.prepareStatement(SQL_CREATE_EMPLOYEE, Statement.RETURN_GENERATED_KEYS);
@@ -98,7 +98,7 @@ public class Main {
 
     public static void selectEmployeeById(Connection connection, int employeeId) throws SQLException {
 
-        final String SQL_SELECT_EMPLOYEE_BY_ID = "SELECT * FROM EmployeeTable WHERE id=?";
+        final String SQL_SELECT_EMPLOYEE_BY_ID = "SELECT * FROM EmployeesTable WHERE id=?";
         PreparedStatement ps = connection.prepareStatement(SQL_SELECT_EMPLOYEE_BY_ID);
         ps.setInt(1, employeeId);
         ResultSet rs = ps.executeQuery();
@@ -112,7 +112,7 @@ public class Main {
 
     public static void selectAllEmployees(Connection connection) throws SQLException {
 
-        final String SQL_SELECT_ALL_EMPLOYEES = "SELECT * FROM EmployeeTable";
+        final String SQL_SELECT_ALL_EMPLOYEES = "SELECT * FROM EmployeesTable";
 
         /**
          * Chú ý: đối với những câu lệnh SQLite không có tham số (dấu ?)
@@ -146,7 +146,7 @@ public class Main {
 
     public static void updateEmployeeById(Connection connection, int id, String fullname, int salary) throws SQLException {
 
-        final String SQL_UPDATE_EMPLOYEE_BY_ID = "UPDATE EmployeeTable SET Fullname = ?, Salary = ? WHERE Id = ?";
+        final String SQL_UPDATE_EMPLOYEE_BY_ID = "UPDATE EmployeesTable SET Fullname = ?, Salary = ? WHERE Id = ?";
         PreparedStatement ps = connection.prepareStatement(SQL_UPDATE_EMPLOYEE_BY_ID);
         ps.setString(1, fullname);
         ps.setInt(2, salary);
@@ -156,7 +156,7 @@ public class Main {
 
     public static void deleteEmployeeById(Connection connection, int id) throws SQLException {
 
-        final String SQL_DELETE_EMPLOYEE_BY_ID = "DELETE FROM EmployeeTable WHERE id = ?";
+        final String SQL_DELETE_EMPLOYEE_BY_ID = "DELETE FROM EmployeesTable WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(SQL_DELETE_EMPLOYEE_BY_ID);
         ps.setInt(1, id);
         ps.executeUpdate();
