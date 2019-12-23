@@ -27,3 +27,7 @@
     - Tạo một JDialog tùy biến với JPanel để nhập dữ liệu.
     - Đưa dữ liệu bên ngoài vào JDialog.
     - Lấy dữ liệu trên JDialog sau khi đã nhập xong (chọn OK), sau đó cập nhật vào bảng.
+    
+### Di chuyển dữ liệu giữa hai bảng dữ liệu
+    Source code: https://github.com/nam-long/learning-java/tree/master/src/learning/swing/table/customized/movingdata
+    
