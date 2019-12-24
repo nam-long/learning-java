@@ -34,11 +34,11 @@ public class SetupTeam extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 /**
-                 * Chỉ số của những dòng đang được chọn trong bảng.
+                 * Chỉ số của những dòng đang được chọn trên bảng.
                  *
                  * Lưu ý: với cách cài đặt danh sách (List) cho dữ liệu của bảng,
                  * thì thứ tự các phần tử trong danh sách cũng tương ứng với thứ tự
-                 * của các phần tử trong bảng.
+                 * của các dòng trên bảng.
                  */
                 int[] rowIndexes = tableAvailableEmployees.getSelectedRows();
                 if (rowIndexes.length > 0) {
@@ -51,11 +51,11 @@ public class SetupTeam extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 /**
-                 * Chỉ số của những dòng đang được chọn trong bảng.
+                 * Chỉ số của những dòng đang được chọn trên bảng.
                  *
                  * Lưu ý: với cách cài đặt danh sách (List) cho dữ liệu của bảng,
                  * thì thứ tự các phần tử trong danh sách cũng tương ứng với thứ tự
-                 * của các phần tử trong bảng.
+                 * của các dòng trên bảng.
                  */
                 int[] rowIndexes = tableTeamMembers.getSelectedRows();
                 if (rowIndexes.length > 0) {
