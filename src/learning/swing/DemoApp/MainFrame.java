@@ -1,6 +1,7 @@
 package learning.swing.DemoApp;
 
 import learning.swing.DemoApp.state.action.ActionState;
+import learning.swing.DemoApp.state.intro.IntroState;
 import learning.swing.DemoApp.state.main.MainState;
 
 import javax.swing.*;
@@ -22,11 +23,12 @@ public class MainFrame extends JFrame {
 
         initComponents();
 
-        open(State.MAIN);
+        open(State.INTRO);
     }
 
     private void initComponents() {
 
+        stateManager.add(State.INTRO, new IntroState());
         stateManager.add(State.MAIN, new MainState());
         stateManager.add(State.ACTION, new ActionState());
     }
