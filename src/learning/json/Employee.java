@@ -1,87 +1,104 @@
 package learning.json;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.List;
+import java.util.Vector;
 
 public class Employee {
 
-    public static void main(String[] args) {
+    public static final String NAME = "name";
+    public static final String AGE = "age";
+    public static final String MARRIED = "isMarried";
+    public static final String HOBBIES = "hobbies";
+    public static final String KIDS = "kids";
+    public static final String KID_NAME = "name";
+    public static final String KID_AGE = "age";
 
-        final String filename = "resources/employee.json";
+    private String name;
 
-        final String jsonString = readJsonFromFile(filename);
+    private int age;
 
-        System.out.println(jsonString);
+    private boolean married;
 
-        JSONParser parser = new JSONParser();
-        JSONObject jsonObject;
-        try {
-            // Tạo một đối tượng JSON từ một chuỗi
-            jsonObject = (JSONObject) parser.parse(jsonString);
+    private List<String> hobbies = new Vector<>();
 
-            System.out.println("Name: " + jsonObject.get("name"));
-            System.out.println("Age: " + jsonObject.get("age"));
-            System.out.println("Married: " + jsonObject.get("isMarried"));
+    private List<Kid> kids = new Vector<>();
 
-            /**
-             * Lấy đối tượng json kiểu mảng có tên là "hobbies".
-             * Lưu ý: Trong trường hợp này, đối tượng mảng "hobbies" chỉ chứa giá trị đơn giản,
-             * không chứa đối tượng có cấu trúc phức tạp, nên chỉ cần duyệt các phần tử trong
-             * đối tượng kiểu mảng này để có thể lấy ra giá trị của nó.
-             */
-            JSONArray hobbies = (JSONArray) jsonObject.get("hobbies");
-            System.out.println("Hobbies:");
-            for (int i = 0; i < hobbies.size(); i++) {
-                String hobby = (String) hobbies.get(i);
-                System.out.println("\t- " + hobby);
-            }
+    public static class Kid {
 
-            /**
-             * Khác với "hobbies", đối tượng kiểu mảng "kids" chứa các phần tử có kiểu đối tượng
-             * phức tạp (name, age), các phần tử này cần phải được xử ly như một đối tượng json
-             * (JSONObject)
-             */
-            JSONArray kids = (JSONArray) jsonObject.get("kids");
-            System.out.println("Kids:");
-            for (int i = 0; i < kids.size(); i++) {
-                JSONObject kid = (JSONObject) kids.get(i);
-                String name = (String) kid.get("name");
-                long age = (Long) kid.get("age");
-                System.out.println(String.format("\tKid %d - name: %s, age: %d", (i + 1), name, age));
-            }
+        private String name;
 
-        } catch (ParseException e) {
-            e.printStackTrace();
+        private int age;
+
+        public Kid(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        @Override
+        public String toString() {
+            return "Kid{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
         }
     }
 
-    public static String readJsonFromFile(String filename) {
+    public String getName() {
+        return name;
+    }
 
-        String jsonString = "";
-        String line;
-        BufferedReader dis = null;
-        try {
-            dis = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
-            while ((line = dis.readLine()) != null) {
-                jsonString += line;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (dis != null)
-                    dis.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return jsonString;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public boolean isMarried() {
+        return married;
+    }
+
+    public void setMarried(boolean married) {
+        this.married = married;
+    }
+
+    public List<String> getHobbies() {
+        return hobbies;
+    }
+
+    public void addHobby(String hobby) {
+        hobbies.add(hobby);
+    }
+
+    public List<Kid> getKids() {
+        return kids;
+    }
+
+    public void addKid(Kid kid) {
+        kids.add(kid);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", married=" + married +
+                ", hobbies=" + hobbies +
+                ", kids=" + kids +
+                '}';
     }
 }
