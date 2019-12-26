@@ -21,5 +21,7 @@
     <orderEntry type="library" name="poi-excelant-4.1.1" level="project" />
     <orderEntry type="library" name="poi-examples-4.1.1" level="project" />
     <orderEntry type="library" name="poi-ooxml-schemas-4.1.1" level="project" />
+    <orderEntry type="library" name="poi-4.1" level="project" />
+    <orderEntry type="library" name="poi-lib" level="project" />
   </component>
 </module>
