@@ -17,7 +17,7 @@ public class Employee {
 
     private int age;
 
-    private boolean married;
+    private boolean isMarried;
 
     private List<String> hobbies = new Vector<>();
 
@@ -68,11 +68,11 @@ public class Employee {
     }
 
     public boolean isMarried() {
-        return married;
+        return isMarried;
     }
 
     public void setMarried(boolean married) {
-        this.married = married;
+        this.isMarried = married;
     }
 
     public List<String> getHobbies() {
@@ -96,7 +96,7 @@ public class Employee {
         return "Employee{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
-                ", married=" + married +
+                ", married=" + isMarried +
                 ", hobbies=" + hobbies +
                 ", kids=" + kids +
                 '}';
