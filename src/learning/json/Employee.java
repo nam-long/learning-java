@@ -29,6 +29,9 @@ public class Employee {
 
         private int age;
 
+        public Kid() {
+        }
+
         public Kid(String name, int age) {
             this.name = name;
             this.age = age;
@@ -51,6 +54,9 @@ public class Employee {
         }
     }
 
+    public Employee() {
+    }
+
     public String getName() {
         return name;
     }
@@ -68,6 +74,13 @@ public class Employee {
     }
 
     public boolean isMarried() {
+        return isMarried;
+    }
+
+    /**
+     * Phương thức này là cần thiết để làm việc với thư viện Jackson
+     */
+    public boolean getIsMarried() {
         return isMarried;
     }
 

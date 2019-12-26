@@ -19,3 +19,16 @@
     
         Source Demo:
             https://github.com/nam-long/learning-java/tree/master/src/learning/json/gson
+
+## Jackson
+
+    Thư viện: 
+        .\lib\jackson\jackson-annotations-2.10.0.pr3.jar
+        .\lib\jackson\jackson-core-2.10.0.pr3.jar
+        .\lib\jackson\jackson-databind-2.10.0.pr3.jar
+    
+    Tài liệu tham khảo:
+        https://www.tutorialspoint.com/jackson/index.htm
+
+    Source Demo:
+        https://github.com/nam-long/learning-java/tree/master/src/learning/json/jackson
