@@ -1,4 +1,4 @@
-package learning.mvc.studentmanager;
+package learning.app.studentmanager;
 
 public class Subject {
 
