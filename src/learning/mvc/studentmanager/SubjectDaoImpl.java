@@ -1,4 +1,4 @@
-package learning.app.StudentApp;
+package learning.mvc.studentmanager;
 
 import java.sql.*;
 import java.util.ArrayList;

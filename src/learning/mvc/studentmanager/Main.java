@@ -1,4 +1,4 @@
-package learning.app.StudentApp;
+package learning.mvc.studentmanager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
