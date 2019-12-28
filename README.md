@@ -24,4 +24,5 @@ Yêu cầu:
     + Sử dụng JOptionPane (tùy biến) để nhập, cập nhật thông tin nhân viên.
 - Yêu cầu cài đặt:
     + Sử dụng mô hình MVC.
+    + Sử dụng SQLite cho cơ sở dữ liệu lưu trữ.
     + Sử dụng các Design Pattern thích hợp.
