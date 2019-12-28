@@ -6,7 +6,7 @@ Thời gian nộp bài: cuối ngày thứ Năm, ngày 02 tháng 01 năm 2020.
 
 Gửi bài tới địa chỉ email: long.trannam@hotmail.com
 
-Tiêu đề email phải định dạng theo mẫu: <Tên Lớp>_<Mã số SV>_<Họ Tên>_ThiCuoiKy
+Tiêu đề email phải định dạng theo mẫu: <Tên Lớp>_<Mã số SV>_<Họ Tên>_ThiGiuaKy
 
 Viết chương trình quản lý nhân viên.
 
