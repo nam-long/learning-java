@@ -2,6 +2,12 @@ LẬP TRÌNH JAVA
 
 ĐỀ THI GIỮA KỲ
 
+Thời gian nộp bài: cuối ngày thứ Năm, ngày 02 tháng 01 năm 2020.
+
+Gửi bài tới địa chỉ email: long.trannam@hotmail.com
+
+Tiêu đề email phải định dạng theo mẫu: <Tên Lớp>_<Mã số SV>_<Họ Tên>_ThiCuoiKy
+
 Viết chương trình quản lý nhân viên.
 
 Yêu cầu:
@@ -16,3 +22,6 @@ Yêu cầu:
 - Yêu cầu giao diện:
     + Sử dụng JTable để lưu danh sách nhân viên có trong cơ sở dữ liệu.
     + Sử dụng JOptionPane (tùy biến) để nhập, cập nhật thông tin nhân viên.
+- Yêu cầu cài đặt:
+    + Sử dụng mô hình MVC.
+    + Sử dụng các Design Pattern thích hợp.
